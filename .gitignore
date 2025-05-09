@@ -1,0 +1,59 @@
+# Dependencias
+node_modules/
+.pnp/
+.pnp.js
+
+# Testing
+coverage/
+
+# Producción
+build/
+dist/
+out/
+.next/
+
+# Archivos de ambiente
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Directorios de cache
+.npm/
+.eslintcache
+.cache/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+.directory
+
+# IDE's y editores
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# Archivos específicos de React/Create React App
+.env.development
+.env.production
+
+# Archivos específicos de XAMPP y bases de datos
+/xampp/
+*.sql
+*.sqlite
+*.sqlite3
+
+# Archivos de configuración específicos
+.babelrc
+webpack.config.js
