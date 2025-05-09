@@ -44,11 +44,12 @@ const ProductoDetailPage = () => {
 
   if (loading) {
     return (
-      <div className="container mt-4">
-        <div className="text-center">
-          <div className="spinner-border" role="status">
+      <div className="container mt-5">
+        <div className="text-center p-5">
+          <div className="spinner-border text-primary" role="status">
             <span className="visually-hidden">Cargando...</span>
           </div>
+          <p className="mt-3">Cargando información del producto...</p>
         </div>
       </div>
     );
@@ -56,9 +57,12 @@ const ProductoDetailPage = () => {
 
   if (error) {
     return (
-      <div className="container mt-4">
-        <div className="alert alert-danger" role="alert">
-          {error}
+      <div className="container mt-5">
+        <div className="alert alert-danger p-4 shadow-sm" role="alert">
+          <h4 className="alert-heading">¡Ups! Algo salió mal</h4>
+          <p>{error}</p>
+          <hr />
+          <p className="mb-0">Intenta recargar la página o vuelve más tarde.</p>
         </div>
       </div>
     );
@@ -66,64 +70,81 @@ const ProductoDetailPage = () => {
 
   if (!producto) {
     return (
-      <div className="container mt-4">
-        <div className="alert alert-warning" role="alert">
-          Producto no encontrado.
+      <div className="container mt-5">
+        <div className="alert alert-warning p-4 shadow-sm" role="alert">
+          <h4 className="alert-heading">Producto no encontrado</h4>
+          <p>Lo sentimos, no pudimos encontrar el producto que estás buscando.</p>
+          <hr />
+          <p className="mb-0">Vuelve a la página principal para ver otros productos disponibles.</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="container mt-4">
-      <div className="card mb-4">
+    <div className="container mt-5">
+      <div className="product-detail">
         <div className="row g-0">
-          <div className="col-md-4">
+          <div className="col-md-5">
             {producto.imagen_url ? (
-              <img 
-                src={producto.imagen_url} 
-                className="img-fluid rounded-start" 
-                alt={producto.nombre} 
-                style={{ maxHeight: '400px', objectFit: 'cover' }}
-              />
+              <div className="img-container">
+                <img 
+                  src={producto.imagen_url} 
+                  className="img-fluid" 
+                  alt={producto.nombre} 
+                />
+              </div>
             ) : (
               <div 
                 className="bg-light d-flex justify-content-center align-items-center" 
-                style={{ height: '400px' }}
+                style={{ height: "400px" }}
               >
-                <span className="text-muted">Sin imagen</span>
+                <span className="text-muted">Sin imagen disponible</span>
               </div>
             )}
           </div>
-          <div className="col-md-8">
-            <div className="card-body">
-              <h2 className="card-title">{producto.nombre}</h2>
-              <p className="card-text">{producto.descripcion}</p>
+          <div className="col-md-7">
+            <div className="card-body p-4">
+              <h2 className="mb-3">{producto.nombre}</h2>
+              <p className="description">{producto.descripcion}</p>
               
               {producto.fecha_importacion && (
-                <p className="card-text">
-                  <small className="text-muted">
-                    Fecha de importación: {new Date(producto.fecha_importacion).toLocaleDateString()}
-                  </small>
+                <p className="meta-info">
+                  <i className="bi bi-calendar-check me-2"></i>
+                  Fecha de importación: {new Date(producto.fecha_importacion).toLocaleDateString()}
                 </p>
               )}
               
               {producto.ficha_tecnica && (
-                <div className="mt-3">
-                  <h5>Ficha Técnica</h5>
-                  <p className="card-text">{producto.ficha_tecnica}</p>
+                <div className="tech-specs">
+                  <h3><i className="bi bi-file-earmark-text me-2"></i>Ficha Técnica</h3>
+                  <p className="mb-0" style={{whiteSpace: 'pre-line'}}>{producto.ficha_tecnica}</p>
                 </div>
               )}
               
-              <LikeDislikeButtons productoId={id} />
+              <div className="mt-4">
+                <LikeDislikeButtons productoId={id} />
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <ResenaForm productoId={id} onResenaSubmitted={handleResenaSubmitted} />
-      
-      <ResenaList resenas={resenas} />
+      <div className="row mt-5">
+        <div className="col-md-6">
+          <div className="review-form">
+            <h3><i className="bi bi-pencil-square me-2"></i>Escribe tu reseña</h3>
+            <ResenaForm productoId={id} onResenaSubmitted={handleResenaSubmitted} />
+          </div>
+        </div>
+        
+        <div className="col-md-6">
+          <div className="review-list">
+            <h3 className="mb-4"><i className="bi bi-chat-quote me-2"></i>Reseñas de usuarios</h3>
+            <ResenaList resenas={resenas} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

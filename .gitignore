@@ -44,16 +44,37 @@ Thumbs.db
 *.sublime-workspace
 *.sublime-project
 
-# Archivos específicos de React/Create React App
-.env.development
-.env.production
+# Archivos específicos de Django
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+db.sqlite3-journal
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+*.pot
+*.mo
+*.log
+local_settings.py
+media/
 
-# Archivos específicos de XAMPP y bases de datos
-/xampp/
-*.sql
-*.sqlite
-*.sqlite3
+# No ignorar db.sqlite3 para fines de demostración
+# db.sqlite3
 
-# Archivos de configuración específicos
-.babelrc
-webpack.config.js
+# Archivos específicos de Mac
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Ignorar package-lock.json debido a su tamaño
+# Comentar esta línea si deseas incluirlo en el repositorio
+package-lock.json
